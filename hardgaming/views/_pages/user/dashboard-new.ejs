@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/_head_new') %>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+
+    
+  
+  <!-- ======= Hero Section ======= -->
+  
+  <!-- End Hero Section -->
+
+  <main id="main" style="background-color: #0b1126;">
+
+    <!-- ======= Speakers Section ======= -->
+    <section id="speakers">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header">
+          <h2 style="color:#f82249;">Your Services</h2>
+          <p></p>
+        </div>
+
+        <div class="row">
+            <% if (!instances) {%>
+                <h1>You have no servers, Purchase one <a href="/pricing">here</a> </h1>
+            <%}else{ 
+                if (!instanceData) {%>
+                    <h1>There was a problem polling Server data please refresh.</h1>
+                    <h3>If this continues please contact support</h3>
+               <% } else {
+                    // console.log('api Instances: ', instanceData);
+                    instances.forEach((instance, i, arr) => {
+                        let status
+                        if (instance.status == 1) {
+                            status = "<span class='badge badge-success'>Running</span>"
+                        }else{
+                            status = "<span class='badge badge-danger'>Stopped</span>"
+                        }
+                        
+                        for (let index = 0; index < instanceData.length; index++) {
+                            const element = instanceData[index];
+                                if (element.InstanceID === instance.instance_id) {%>
+                                    <!-- Display Instance Data-->
+                                    <div href="#" class="col-lg-4 col-md-6">
+                                        <div class="speaker" data-aos="fade-up" data-aos-delay="100">
+                                            <img src="<%=instance.img%>" alt="" class="img-fluid" style="max-height: 240px; max-width: 416px;" >
+                                            <div class="details">
+                                            <h3><%=instance.game_id%> - <%=element.FriendlyName%></h3>
+                                            <p>Server Status:  <%-status%></p>
+                                            <p><a href="/instance/manage/<%=instance.instance_id%>" class="btn btn-dark -btn-block">MANAGE</a></p>
+                                            <div class="social">
+                                                <a class="badge badge-success" onclick="startInstance('<%=element.InstanceID%>')" ><i class="bi bi-play-fill"></i></a>
+                                                <a class="badge badge-warning" onclick="stopInstance('<%=element.InstanceID%>')" ><i class="bi bi-stop-fill"></i></a>
+                                                <a class="badge badge-danger" onclick="delInstance('<%=element.InstanceID%>')" ><i class="bi bi-trash-fill"></i></a>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Start Instance Form-->
+                                    <div style="display: none;">
+                                        <form method="post" id="start-<%=element.InstanceID%>" action="/instance/start">
+                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                        </form>
+                                    </div>
+
+                                    <!--Stop Instance Form-->
+                                    <div style="display: none;">
+                                        <form method="post" id="stop-<%=element.InstanceID%>" action="/instance/stop">
+                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                        </form>
+                                    </div>
+
+                                    <!--Delete Instance Form-->
+                                    <div style="display: none;">
+                                        <form method="post" id="del-<%=element.InstanceID%>" action="/instance/delete">
+                                            <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                        </form>
+                                    </div>
+                             <%}
+                            }
+                        });
+                }
+                
+            }%>
+
+            <div id="progress-modal" class="modal fade">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><strong>Please Wait...</strong> <br>Performing requested Operation</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="login">
+                        <div class="modal-body text-center">
+                            
+                            <div id="bar"></div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+      </div>
+
+    </section><!-- End Speakers Section -->
+
+    
+
+
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+  <script>
+    function startInstance(instance_id) {
+        startProgress()
+        document.forms[`start-${instance_id}`].submit();
+    }
+    function stopInstance(instance_id) {
+        startProgress()
+        document.forms[`stop-${instance_id}`].submit();
+    }
+    function delInstance(instance_id) {
+        startProgress()
+        document.forms[`del-${instance_id}`].submit();
+    }
+
+    function startProgress() {
+        var bar=new RadialProgress(document.getElementById("bar"),{indeterminate:true,colorFg:"#FFFFFF",thick:2.5,noPercentage:true});
+        $('#progress-modal').modal('show');
+    }
+  </script>
+
+</body>
+
+</html>

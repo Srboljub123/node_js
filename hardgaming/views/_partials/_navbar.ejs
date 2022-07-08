@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <nav class="striped navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/"><img class="logo" src="/img/logo.png"/> <%= title %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <% for (let i=0; i<nav.length; i++) {%>
+                <% if(active === nav[i].title){ %>
+                    <li class="nav-item active">
+                <% } else { %>
+                    <li class="nav-item">
+                <% } %>
+                
+                    <a class="nav-link" href="<%= nav[i].link %>">
+                        <%= nav[i].title %>
+                    </a>
+                </li>
+            <% } %>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+              <% if(status.loggedin) {%>
+                <li class="nav-item"><a class="nav-link" href="/user/dashboard"><i class="fa-solid fa-user"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="#"><i class="fa-solid fa-gear"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="/auth/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+              <% } else {%>
+                <li class="nav-item"><a class="nav-link" href="/user/auth/register"><i class="fa-solid fa-user-plus"></i></a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/auth/login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></li>
+              <% } %>
+            
+          </ul>
+        </div>
+      </nav>
+</div>

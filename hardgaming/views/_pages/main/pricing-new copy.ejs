@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/_head_new') %>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+  <main id="main">
+    <!-- ======= Hero Section ======= -->
+  
+  <!-- End Hero Section -->
+
+    <!-- ======= Games Section ======= -->
+
+        <div class="row">
+          <% games.forEach((game, i, arr) => {%>
+            <% let price = game.price;
+                var dollars = price / 100;
+                dollars = dollars.toLocaleString("en-US", {style:"currency", currency:"USD"});
+            %>
+
+            <div class="col-lg-4 col-md-6">
+              <div class="speaker" data-aos="fade-up" data-aos-delay="100">
+                <img src="<%=game.img%>" alt="" class="img-fluid">
+                <div class="details">
+                  <h3><a href="#"><%=game.name%></a></h3>
+                  <p>Starting at: <%=dollars%></p>
+                  
+                  <!-- <div class="social">
+                    <a href=""><i class="bi bi-twitter"></i></a>
+                    <a href=""><i class="bi bi-facebook"></i></a>
+                    <a href=""><i class="bi bi-instagram"></i></a>
+                    <a href=""><i class="bi bi-linkedin"></i></a>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          <%});%>
+        </div>
+      </div>
+
+    </section>
+    <!-- End Games Section -->
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+.logo{
+    height: 45px;
+}
+
+.striped{
+    background: 
+  /* On "top" */
+  /* repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #af0202 10px,
+    #444444 20px
+  ), */
+  /* on "bottom" */
+  linear-gradient(
+    to bottom,
+    #af0202,
+    #444444
+  );
+}
+
+body{
+    background: rgb(120,2,2);
+    background: -moz-radial-gradient(circle, rgba(120,2,2,1) 0%, rgba(68,68,68,1) 100%);
+    background: -webkit-radial-gradient(circle, rgba(120,2,2,1) 0%, rgba(68,68,68,1) 100%);
+    background: radial-gradient(circle, rgba(120,2,2,1) 0%, rgba(68,68,68,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#780202",endColorstr="#444444",GradientType=1);
+}
+
+.main-content{
+    margin-top: 10px;
+    /* background: rgba(68, 1, 1, 0.5); */
+    color: white;
+    /* height: 800px; */
+    /* margin-left: 77px; margin-right: 77px; */
+    /* margin-left: 4%; margin-right: 4%; */
+    /* -moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #965F06;
+	-moz-box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4);
+	-webkit-box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4);
+	box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4); */
+	/* text-shadow:
+		1px 1px 2px rgba(000,000,000,0.7),
+		0px 1px 0px rgba(255,255,255,0.4); */
+}
+
+.card-content{
+    color: black;
+}
+
+.card-content img {
+    /* width: 493px;
+    height: 277px;  */
+    /* width: 362px; */
+    height: 209px; 
+}
+
+.game-logo{
+    position: relative;
+    max-height: 344px;
+    max-width: 474px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-header{
+    position: relative;
+    height: 10%;
+    width: 90%;
+    max-height: 600px; 
+    min-height: 200px; 
+}
+
+.side-content{
+    margin-top: 10px;
+    /* background: rgba(153, 153, 153, 0.2); */
+    color: white;
+    /* height: 800px; */
+    /* -moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #965F06;
+	-moz-box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4);
+	-webkit-box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4);
+	box-shadow:
+		0px 1px 1px rgba(000,000,000,0.5),
+		inset 1px 2px 0px rgba(255,255,255,0.4); */
+	/* text-shadow:
+		1px 1px 2px rgba(000,000,000,0.7),
+		0px 1px 0px rgba(255,255,255,0.4); */
+    
+}
+
+@media (min-width: 1200px){
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1893px;
+    }
+}
+
+.login {
+    width: 400px;
+    background-color: #0b1126;
+}
+.login h1 {
+    text-align: center;
+    color: #5b6574;
+    font-size: 24px;
+    padding: 20px 0 20px 0;
+    border-bottom: 1px solid #dee0e4;
+}
+.login form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+}
+.login form label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    background-color: #af0202;
+    color: #ffffff;
+}
+.login form input[type="password"], .login form input[type="text"], .login form input[type="email"] {
+    width: 310px;
+    height: 50px;
+    border: 1px solid #dee0e4;
+    margin-bottom: 20px;
+    padding: 0 15px;
+}
+.login form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+   margin-top: 20px;
+    background-color: #af0202;
+    border: 0;
+    cursor: pointer;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background-color 0.2s;
+}
+.login form input[type="submit"]:hover {
+  background-color: #af0202;
+    transition: background-color 0.2s;
+}
+
+.modal-header{
+    background-color: #0b1126;
+    
+}
+
+.modal-body{
+    background-color: #0b1126;
+}
+
+.modal-title{
+    color: white;
+}

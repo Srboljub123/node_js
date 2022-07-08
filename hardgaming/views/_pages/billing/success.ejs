@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../_partials/_head') %>
+    </head>
+    <body>
+        
+        <% if (game.avail > 0) { game.avail = "Yes"}else{game.avail = "No"} %>
+        <% let price = game.price;
+            var dollars = price / 100;
+            dollars = dollars.toLocaleString("en-US", {style:"currency", currency:"USD"});
+        %>
+
+        <%- include('../../_partials/_navbar') %>
+
+        <div class="container">
+            
+            <!-- <div class="row">
+                <div class="col-12 game-header">
+                    
+                </div>
+                    
+                </div>
+            </div> -->
+            <div class="row">
+                <!-- <div class="col-2 shadow-lg side-content text-center">
+                    Left Side Panel
+                </div> -->
+                <div class="col-10 shadow-lg main-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success" role="alert">
+                                <strong>Success!</strong> Your purchase has been completed successfully!
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="col-2">
+                            <img class="game-logo" src="<%=game.img%>"/>
+                        </div>
+                        <div class="col-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-7">
+                            <p><b>Name:</b><br/> <%=game.name%></p>
+                            <p><b>Description:</b><br/> <%=game.shortdesc%></p>
+                            <p><b>User Count:</b><br/><%=game.users%></p>
+                            <p><b>Available:</b><br/><%=game.avail%></p>
+                            <p><b>Price:</b><br/><%=dollars%></p>
+                        </div>
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="col-12">
+                            <button type="button" class="btn btn-dark btn-block" data-toggle="modal" data-target=".bd-example-modal-xl">
+                                Create Server
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                        aria-labelledby="myHugeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <h3 class="text-center"><%=game.name%> - <%=game.users%> players</h3>
+                            <p></p>
+                            <h2 class="text-center">Thank you for choosing HardGaming!</h2>
+                            
+                            <h5> Please fill out the following to create <b>your</b> new server!</h5>
+                            <form method="post" action="/instance/create">
+                                <div class="input-group input-group-sm">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text" id="ServerNamelbl">Server Name</span>
+                                    </div>
+                                    <input type="text" class="form-control" aria-label="Small" name="serverName" aria-describedby="ServerNamelbl">
+                                    <input type="text" hidden value="<%=game.id %>" name="gameid">
+                                    <input type="text" hidden value="<%=paymentIntent%>" name="paymentIntent">
+                                  </div>
+                                  <button type="submit" class="btn btn-dark btn-block">Create Server</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <%- include('../../_partials/_sidebar') %>
+            </div>
+        </div>
+
+        <%- include('../../_partials/_footer') %>
+    </body>
+    <!-- <script src="/api/amp/amp-functions.js"></script> -->
+    <script>
+        
+    </script>
+</html>

@@ -1,0 +1,14 @@
+<% for (let i=0; i<nav.length; i++) {%>
+    <% if(active === nav[i].title){ %>
+        <li class="selected">
+    <% } else { %>
+        <li>
+    <% } %>
+    
+        <a href="<%= nav[i].link %>">
+            <i class="fa <%= nav[i].icon %>"></i> 
+            <%= nav[i].title %>
+        </a>
+    </li>
+<% } %>
+

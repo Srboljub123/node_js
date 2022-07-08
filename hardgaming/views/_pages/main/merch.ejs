@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/_head_new') %>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+
+  <main id="main" style="background-color: #0b1126;">
+    
+    <section id="speakers-details">
+      <div class="container mt-5">
+        <div class="section-header">
+          <h2>Merchandise Page</h2>
+        </div>
+        
+        <div class="row products-content text-white">
+          <% products.map((item) => { %>
+            <div class="col-lg-4 col-md-6 p-5">
+              <div class="card" style="width:400px">
+                <a href="/merch/<%= item.id %>" target="_self" ><img class="card-img-top" src="<%= item.thumbnail_url %>" alt="no image"></a>
+                <div class="card-body text-center">
+                  <a href="/merch/<%= item.id %>" target="_self" ><h4 class="card-title text-black"><%= item.name %></h4></a>
+                  <a href="/merch/<%= item.id %>" target="_self" class="btn btn-primary">Buy Now</a>
+                </div>
+              </div>
+            </div>  
+          <% }) %>
+            
+        </div>
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+  <script>
+  </script>
+
+</body>
+
+</html>

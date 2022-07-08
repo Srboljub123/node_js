@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/_head_new') %>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+
+  <main id="main" style="background-color: #0b1126;">
+    
+    <section id="speakers-details">
+      <div class="container mt-5 bootdey">
+        <div class="section-breadcrumb">
+          <ul class="breadcrumb pt-5">
+            <li><a href="/">Home</a></li>
+            <li><a href="/merch">Products</a></li>
+            <li><%= product.sync_product.name %></li>
+          </ul>
+          <hr class="text-white"/>
+        </div>
+        
+        <!-- <div class="row products-content text-white">
+          <%= product.sync_product.id %>
+        </div> -->
+        <div class="col-md-12 products-content">
+          <section class="panel">
+                <div class="panel-body py-2">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="pro-img-details">
+                            <img class="product_img" src="<%= product.sync_product.thumbnail_url %>" alt="">
+                        </div>
+                        <!-- <div class="pro-img-list">
+                            <a href="#">
+                                <img src="https://via.placeholder.com/115x100/87CEFA/000000" alt="">
+                            </a>
+                            <a href="#">
+                                <img src="https://via.placeholder.com/115x100/FF7F50/000000" alt="">
+                            </a>
+                            <a href="#">
+                                <img src="https://via.placeholder.com/115x100/20B2AA/000000" alt="">
+                            </a>
+                            <a href="#">
+                                <img src="https://via.placeholder.com/120x100/20B2AA/000000" alt="">
+                            </a>
+                        </div> -->
+                    </div>
+                    <div class="col-md-6 col-sm-12 pt-2">
+                        <h1 class="text-white">
+                          <%= product.sync_product.name %>
+                        </h1>
+
+                        <div class="product_meta">
+                            <span class="text-white"> <strong class="text-white pr-2">variants: </strong> <%= product.sync_product.variants %></span>
+                            <span class="text-white"><strong class="text-white pr-2">synced: </strong> <%= product.sync_product.synced %></span>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="size" class="text-white">Size:</label>
+                          <select class="form-control" id="size">
+                            <option value="<%= product.sync_variants[0].retail_price %>" key="<%= product.sync_variants[0].sku %>" path="<%= product.sync_product.thumbnail_url %>""><%= product.sync_product.name %></option>
+                            <% product.sync_variants.map((item, index) => { %>
+                            <option value="<%= item.retail_price %>" key="<%= item.sku %>" path="<%= item.product.image %>""><%= item.name %></option>
+                  
+                            <% }) %>
+                          </select>
+                        </div>
+
+                        <div class="pb-2"> <strong class="text-white pr-2">Price : </strong> <span class="text-white product_price"> $<%= product.sync_variants[0].retail_price %></span></div>
+                        <div> <strong class="text-white pr-2">Sku : </strong> <span class="text-white product_sku"> <%= product.sync_variants[0].sku %></span></div>
+                        <div class="form-group py-2">
+                            <label class="text-white">Quantity: </label>
+                            <input type="number" placeholder="1" class="form-control quantity">
+                        </div>
+                        <p>
+                            <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            </div>
+
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+  <script>
+    $(document).ready(function(){
+      $('select').on('change', function() {
+        var price = $(this).val()
+        var sku =  $('option:selected', this).attr('key');
+        var path =  $('option:selected', this).attr('path');
+
+        // alert(path)
+
+        $(".product_price").text("$"+price)
+        $(".product_sku").text(sku)
+        $(".product_img").attr('src', path)
+      
+      });
+    });
+  </script>
+
+</body>
+
+</html>

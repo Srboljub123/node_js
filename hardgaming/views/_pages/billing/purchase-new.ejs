@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../_partials/_head_new') %>
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+  <main id="main">
+    <!-- ======= Hero Section ======= -->
+  
+  <!-- End Hero Section -->
+
+    <!-- ======= Games Section ======= -->
+    <div class="row">
+        <div class="col-12">
+            <div id="error-message">
+              </div>
+        </div>
+    </div>
+    <section id="speakers-details" style="background-color: #0b1126;/* color: white; */">
+        <div class="container">
+          <div class="section-header">
+            <h2>Game Details</h2>
+            <p></p>
+          </div>
+  
+          <div class="row">
+            <div class="col-md-6">
+              <img src="<%= game.img %>" alt="Speaker 1" class="img-fluid">
+            </div>
+  
+            <div class="col-md-6">
+              <div class="details" style="color: white;">
+                <h2 style="/* color: white; */"><%=game.name %></h2>
+                <p><%= game.shortdesc%></p> 
+                <br>
+                <form id="payment-form" data-secret="<%= secKey %>">
+                                
+                    <div id="payment-element">
+                        <!-- Elements will create form elements here -->
+                    </div>
+                    <br>
+                    <button id="submit" class="btn btn-dark btn-block">PURCHASE NOW</button>
+                </form>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+      </section>
+    <!-- End Games Section -->
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
+  <script>
+       
+    // Set your publishable key: remember to change this to your live publishable key in production
+    // See your keys here: https://dashboard.stripe.com/apikeys
+    const stripe = Stripe('pk_test_51KzU4qGLO8h1ns7mHP1IS5rbOL6NqHM0s6tMBMm4PrmGAq0zn10pzCbgvQ4ufbhnL15PCqDTB2cupOcv6InrYV1l00CAmk3eLV');
+    const options = {
+        clientSecret: '<%= secKey %>',
+        appearance:{
+            theme: 'night',
+            labels: 'floating'
+        }
+
+    };
+
+    // Set up Stripe.js and Elements to use in checkout form, passing the client secret obtained in step 2
+    const elements = stripe.elements(options);
+
+    // Create and mount the Payment Element
+    const paymentElement = elements.create('payment');
+    paymentElement.mount('#payment-element');
+
+    const form = document.getElementById('payment-form');
+
+    form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const {err} = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        confirmParams: {
+        return_url: 'https://dev.hardgaming.tech/success/<%=game.id%>',
+        },
+    });
+
+    if (err) {
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Show error to your customer (for example, payment
+        // details incomplete)
+        const messageContainer = document.getElementById('error-message');
+        messageContainer.innerHTML = '<div class="alert alert-danger" role="alert">${err.message}</div>';
+    } else {
+        // Your customer will be redirected to your `return_url`. For some payment
+        // methods like iDEAL, your customer will be redirected to an intermediate
+        // site first to authorize the payment, then redirected to the `return_url`.
+    }
+    });
+
+</script>
+
+</body>
+
+</html>

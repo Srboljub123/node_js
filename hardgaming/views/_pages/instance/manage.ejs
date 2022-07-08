@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <% 
+    let newData
+    let userInstance
+
+    let currentMemPercentage = instanceMetrics["Memory Usage"].Percent
+    console.log(currentMemPercentage);
+    let memFill = (currentMemPercentage * 180)/100
+
+    let currentCPUPercentage = instanceMetrics["CPU Usage"].Percent
+    console.log(currentCPUPercentage);
+    let CPUFill = (currentCPUPercentage * 180)/100
+
+    let currentUsersPercentage = instanceMetrics["Active Users"].Percent
+    console.log(currentUsersPercentage);
+    let UsersFill = (currentUsersPercentage * 180)/100
+    let currentUsers = instanceMetrics["Active Users"].RawValue
+    let maxUsers = instanceMetrics["Active Users"].MaxValue   
+    
+  %> 
+
+  <%- include('../../_partials/_head_new') %>
+  <style>
+    .square {
+      position: relative;
+      width: 100%;
+      background-color: #040919;
+      border-style: solid;
+      border-color: black;
+      border-width: 5px;
+    }
+
+    .square:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+
+    .content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow:auto;
+    }
+
+    .circle-wrap {
+      margin: 50px auto;
+      width: 150px;
+      height: 150px;
+      background: #e6e2e7;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillMem {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillMem {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillMem {
+      animation: fillMem ease-in-out 3s;
+      transform: rotate(<%=memFill%>deg);
+    }
+    @keyframes fillMem {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=memFill%>deg);
+      }
+    }
+
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillCPU {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillCPU {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillCPU {
+      animation: fillCPU ease-in-out 3s;
+      transform: rotate(<%=CPUFill%>deg);
+    }
+    @keyframes fillCPU {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=CPUFill%>deg);
+      }
+    }
+
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillUsers {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillUsers {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillUsers {
+      animation: fillUsers ease-in-out 3s;
+      transform: rotate(<%=UsersFill%>deg);
+    }
+    @keyframes fillUsers {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=UsersFill%>deg);
+      }
+    }
+    .circle-wrap .inside-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #fff;
+      line-height: 130px;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 10px;
+      position: absolute;
+      z-index: 100;
+      font-weight: 700;
+      font-size: 2em;
+    }
+  </style>
+  <link rel="stylesheet" href="/css/resources.css"/>
+</head>
+
+<body>
+
+  <%- include('../../_partials/_header_new') %>
+
+  <%- include('../../_partials/_navbar_new') %>
+
+    
+
+  <main id="main" style="background-color: #0b1126;">
+    <% let status
+    if (instance.status == 1) {
+        status = "<span class='badge badge-success'>Running</span>"
+    }else{
+        status = "<span class='badge badge-danger'>Stopped</span>"
+    } %> 
+    <!-- ======= Games Section ======= -->
+    <div class="row">
+      <div class="col-12">
+          <div id="error-message">
+            </div>
+      </div>
+  </div>
+  <section id="speakers-details" style="background-color: #0b1126;/* color: white; */">
+      <div class="container">
+        <div class="section-header">
+          <h2><%= instance.game_id%> - <%=instanceData.FriendlyName%></h2>
+          <p id="status"><%-status%></p>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="text-center">Memory Usage</h3>
+            <div class="circle-wrap">
+              <div class="circle">
+                
+                <div class="mask full">
+                  <div class="fillMem"></div>
+                </div>
+              
+                <div class="mask half">
+                  <div class="fillMem"></div>
+                </div>
+                
+                <div class="inside-circle" id="memCircle">
+                  <%=currentMemPercentage%>%
+                </div>
+                
+              </div>
+            </div>
+          </div>  
+          <div class="col-md-4">
+            <h3 class="text-center">CPU Usage</h3>
+            <div class="circle-wrap">
+              <div class="circle">
+                
+                <div class="mask full">
+                  <div class="fillCPU"></div>
+                </div>
+              
+                <div class="mask half">
+                  <div class="fillCPU"></div>
+                </div>
+                
+                <div class="inside-circle" id="cpuCircle">
+                  <%=currentCPUPercentage%>%
+                </div>
+                
+              </div>
+            </div>
+          </div>  
+          <div class="col-md-4">
+            <h3 class="text-center">Active Users</h3>
+            <div class="circle-wrap">
+              <div class="circle">
+                
+                <div class="mask full">
+                  <div class="fillUsers"></div>
+                </div>
+              
+                <div class="mask half">
+                  <div class="fillUsers"></div>
+                </div>
+                
+                <div class="inside-circle" id="usersCircle">
+                  <%=currentUsers%>/<%=maxUsers%>
+                </div>
+                
+              </div>
+            </div>
+          </div>  
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="details" style="color: white;">
+              <h2 style="/* color: white; */">File Browser</h2>
+              <br>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="details" style="color: white;">
+              <h2 style="/* color: white; */">Console</h2>
+              <p><div class="square">
+                  <div class="content" id="console">
+                    Hello!
+                  </div>
+                </div></p> 
+              <br>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="details" style="color: white;">
+              <h2 style="/* color: white; */">Controls</h2> 
+
+              <button class="btn btn-success" onclick="startInstance('<%=instanceData.InstanceID%>')">Start</button><br>
+              <button class="btn btn-warning" onclick="stopInstance('<%=instanceData.InstanceID%>')">Stop</button><br>
+              <button class="btn btn-info" onclick="restartInstance('<%=instanceData.InstanceID%>')">Restart</button><br>
+              <button class="btn btn-danger" onclick="delInstance('<%=instanceData.InstanceID%>')">Delete</button>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--Start Instance Form-->
+      <div style="display: none;">
+          <form method="post" id="start-<%=instanceData.InstanceID%>" action="/instance/start">
+              <input type="text" hidden value="<%=instanceData.InstanceName%>" name="instanceName">
+          </form>
+      </div>
+
+      <!--Stop Instance Form-->
+      <div style="display: none;">
+          <form method="post" id="stop-<%=instanceData.InstanceID%>" action="/instance/stop">
+              <input type="text" hidden value="<%=instanceData.InstanceName%>" name="instanceName">
+          </form>
+      </div>
+
+      <!--Delete Instance Form-->
+      <div style="display: none;">
+          <form method="post" id="del-<%=instanceData.InstanceID%>" action="/instance/delete">
+              <input type="text" hidden value="<%=instanceData.InstanceID%>" name="instanceID">
+              <input type="text" hidden value="<%=instanceData.InstanceName%>" name="instanceName">
+          </form>
+      </div>
+
+      <!--Restart Instance Form-->
+      <div style="display: none;">
+          <form method="post" id="restart-<%=instanceData.InstanceID%>" action="/instance/restart">
+              <input type="text" hidden value="<%=instanceData.InstanceName%>" name="instanceName">
+          </form>
+      </div>
+
+      <div id="progress-modal" class="modal fade">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title"><strong>Please Wait...</strong> <br>Performing requested Operation</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="login">
+                        <div class="modal-body text-center">
+                            
+                            <div id="bar"></div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div>
+        </div>
+      </div>
+
+    </section>
+  <!-- End Games Section -->
+  </main><!-- End #main -->
+
+  <%- include('../../_partials/_footer_new') %>
+
+ 
+
+ 
+  <script src="webrcon.js"></script>
+  <script>
+    // const WebRcon = dcodeIO.WebRcon;
+    
+    // // Create a new client:
+    // var rcon = new WebRcon('192.168.3.2', 27016)
+     
+    // // Handle events:
+    // rcon.on('connect', function() {
+    //     console.log('CONNECTED')
+        
+    //     // Run a command once connected:
+    //     rcon.run('echo hello world!', 0)
+    // })
+    // rcon.on('disconnect', function() {
+    //     console.log('DISCONNECTED')
+    // })
+    // rcon.on('message', function(msg) {
+    //     console.log('MESSAGE:', msg)
+    // })
+    // rcon.on('error', function(err) {
+    //     console.log('ERROR:', err)
+    // })
+     
+    // // Connect by providing the server's rcon.password:
+    // rcon.connect('Ezekiel:1fdc2c59-a76d-46c6-b3ad-a27f01f16299')
+    
+    
+    
+    
+    let status
+    
+    $(document).ready(function(){
+      wsShit()
+    });
+
+    let wsShit = ()=>{
+      
+    }
+    
+    let newData
+      let userInstance
+
+      let currentMemPercentage
+      let memFill
+
+      let currentCPUPercentage
+      let CPUFill
+
+      let currentUsersPercentage
+      let UsersFill
+      let currentUsers
+      let maxUsers
+
+      let wsUri = 'wss://test.hardgaming.tech/stream/<%=token%>'
+      console.log(wsUri);
+      var ws = new WebSocket(wsUri);
+
+      ws.onopen = function() {
+        document.getElementById('console').innerHTML="WS Connected"
+        // alert("WS Connected");
+        
+      };
+
+      ws.onmessage = function (evt) { 
+        var newData = JSON.parse(evt.data);
+        var rawData = evt.data;
+        
+        
+
+        if (newData) {
+          
+          if (newData.Parameters) {
+            document.getElementById('console').innerHTML+=`</br><p>${rawData}</p>`
+            if (newData.Parameters.InstanceID) {
+              
+              console.log(newData.Parameters.InstanceID);
+              console.log('<%=instanceData.InstanceID%>');
+              if (newData.Parameters.InstanceID == '<%=instanceData.InstanceID%>') {
+                console.log(newData);
+                
+                userInstance = newData.Parameters
+                instanceMetrics = newData.Parameters.Metrics
+
+                currentMemPercentage = instanceMetrics["Memory Usage"].Percent
+                console.log(currentMemPercentage);
+                memFill = (currentMemPercentage * 180)/100
+
+                currentCPUPercentage = instanceMetrics["CPU Usage"].Percent
+                console.log(currentCPUPercentage);
+                CPUFill = (currentCPUPercentage * 180)/100
+
+                currentUsersPercentage = instanceMetrics["Active Users"].Percent
+                console.log(currentUsersPercentage);
+                UsersFill = (currentUsersPercentage * 180)/100
+                currentUsers = instanceMetrics["Active Users"].RawValue
+                maxUsers = instanceMetrics["Active Users"].MaxValue
+                
+                document.getElementById('memCircle').innerHTML=`${currentMemPercentage}%`
+                document.getElementById('cpuCircle').innerHTML=`${currentCPUPercentage}%`
+                document.getElementById('usersCircle').innerHTML=`${currentUsers}/${maxUsers}`
+
+                switch (newData.Parameters.State) {
+                  case -1:
+                    status = "<span class='badge badge-danger'>Stopped</span>"
+                    document.getElementById('status').innerHTML=status
+                    break;
+                  case 0:
+                    status = "<span class='badge badge-danger'>Stopped</span>"
+                    document.getElementById('status').innerHTML=status
+                    break;
+                  case 20:
+                    status = "<span class='badge badge-success'>Running</span>"
+                    document.getElementById('status').innerHTML=status
+                    break
+                  case 10:
+                    status = "<span class='badge badge-warning'>Starting</span>"
+                    document.getElementById('status').innerHTML=status
+                  case 30:
+                    status = "<span class='badge badge-warning'>ReStarting</span>"
+                    document.getElementById('status').innerHTML=status
+                    break;
+                  default:
+                    status = "<span class='badge badge-danger'>ERROR</span>"
+                    document.getElementById('status').innerHTML=status
+                    break;
+                }
+                
+              }
+            }
+          }
+        }
+      };
+
+      function startInstance(instance_id) {
+        startProgress()
+        document.forms[`start-${instance_id}`].submit();
+      }
+      function restartInstance(instance_id) {
+        startProgress()
+        document.forms[`restart-${instance_id}`].submit();
+      }
+      function stopInstance(instance_id) {
+        startProgress()
+        document.forms[`stop-${instance_id}`].submit();
+      }
+      function delInstance(instance_id) {
+        startProgress()
+        document.forms[`del-${instance_id}`].submit();
+      }
+
+      function startProgress() {
+        var bar=new RadialProgress(document.getElementById("bar"),{indeterminate:true,colorFg:"#FFFFFF",thick:2.5,noPercentage:true});
+        $('#progress-modal').modal('show');
+      }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,352 @@
+
+<%- include('../../_partials/_head') %>
+<%- include('../../_partials/_header') %>
+
+<%- include('../../_partials/_right') %>
+
+			<div class="content_wrapper">
+
+				<div class="container-fluid">
+		
+					<!-- breadcrumb -->
+		
+					<div class="page-heading">
+		
+						<div class="row d-flex align-items-center">
+		
+							<div class="col-md-6">
+		
+								<div class="page-breadcrumb">
+		
+									<h1>Dashboard</h1>
+		
+								</div>
+		
+							</div>
+		
+							<div class="col-md-6 justify-content-md-end d-md-flex">
+		
+								<div class="breadcrumb_nav">
+		
+									<ol class="breadcrumb">
+		
+										<li>
+		
+											<i class="fa fa-home"></i>
+		
+											<a class="parent-item" href="index.html">Home</a>
+		
+											<i class="fa fa-angle-right"></i>
+		
+										</li>
+		
+										<li class="active">
+		
+											Dashboard
+		
+										</li>
+		
+									</ol>
+		
+								</div>
+		
+							</div>
+		
+						</div>
+		
+					</div>
+		
+					<!-- breadcrumb_End -->
+		
+		
+		
+					<!-- Section -->
+		
+					<section class="chart_section">
+		
+						<div class="row">
+		
+							<!-- <div class="col-xl-3 col-sm-6 mb-4">
+		
+								<div class="card border-0 text-light">
+		
+									<div class="card-body">
+		
+										<div class="row">
+		
+											<div class="col-12">
+		
+												<div class="homepage_single">
+		
+													<span class="sec_icon"><i class="fa fa-dollar" aria-hidden="true"></i></span>
+		
+													<div class="homepage_fl_right">
+		
+														<h4 class="mt-0">Daily sales</h4>
+		
+														<h3>$30, <span class="single-count">305</span></h3>
+		
+													</div>
+		
+													<p>
+		
+														Total items sold <span class="fl_right text-success">GOOD <i class="fa fa-long-arrow-up" aria-hidden="true"></i></span>
+		
+													</p>
+		
+												</div>
+		
+											</div>
+		
+										</div>
+		
+									</div>
+		
+								</div>
+		
+							</div> -->
+		
+		
+		
+							<div class="col-xl-3 col-sm-6 mb-4">
+		
+								<div class="card border-0 text-light">
+		
+									<div class="card-body">
+		
+										<div class="row">
+		
+											<div class="col-12">
+		
+												<div class="homepage_single">
+		
+													<span class="sec_icon"><i class="fa fa-group" aria-hidden="true"></i></span>
+		
+													<div class="homepage_fl_right">
+		
+														<h4 class="mt-0">Visitors</h4>
+		
+														<h3><span class="single-count"><%= data.length %></span></h3>
+		
+													</div>
+		
+													<p>
+		
+														Visitors <span class="fl_right text-danger">Normal <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+		
+													</p>
+		
+												</div>
+		
+											</div>
+		
+										</div>
+		
+									</div>
+		
+								</div>
+		
+							</div>
+		
+		
+		
+							<!-- <div class="col-xl-3 col-sm-6 mb-4">
+		
+								<div class="card border-0 text-light">
+		
+									<div class="card-body">
+		
+										<div class="row">
+		
+											<div class="col-12">
+		
+												<div class="homepage_single">
+		
+													<span class="sec_icon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+		
+													<div class="homepage_fl_right">
+		
+														<h4 class="mt-0">Messages</h4>
+		
+														<h3><span class="single-count">1228</span></h3>
+		
+													</div>
+		
+													<p>
+		
+														Last month <span class="fl_right text-danger">Normal <i class="fa fa-long-arrow-down" aria-hidden="true"></i></span>
+		
+													</p>
+		
+												</div>
+		
+											</div>
+		
+										</div>
+		
+									</div>
+		
+								</div>
+		
+							</div>
+		
+		
+		
+							<div class="col-xl-3 col-sm-6 mb-4">
+		
+								<div class="card border-0 text-light">
+		
+									<div class="card-body">
+		
+										<div class="row">
+		
+											<div class="col-12">
+		
+												<div class="homepage_single">
+		
+													<span class="sec_icon"><i class="fa fa-heart" aria-hidden="true"></i></span>
+		
+													<div class="homepage_fl_right">
+		
+														<h4 class="mt-0">Followers</h4>
+		
+														<h3><span class="single-count">+1234K</span></h3>
+		
+													</div>
+		
+													<p>
+		
+														Update now <span class="fl_right text-success">Update <i class="fa fa-refresh" aria-hidden="true"></i></span>
+		
+													</p>
+		
+												</div>
+		
+											</div>
+		
+										</div>
+		
+									</div>
+		
+								</div>
+		
+							</div> -->
+		
+						</div>
+		
+		
+		
+						<div class="row">
+		
+		
+		
+							<div class="col-xl-8 mb-4">
+		
+								<div class="card card-shadow">
+		
+									<div class="card-header">
+		
+										<div class="card-title">
+		
+											Unique Visitors by Country
+		
+										</div>
+		
+									</div>
+		
+		
+		
+									<div class="row">
+		
+										<div class="col-xl-8 col-lg-7 col-md-8">
+		
+		
+		
+											<div class="card-body">
+		
+												<div class="vmap-wrap" id="world-map" style="height:200px;"></div>
+		
+											</div>
+		
+										</div>
+		
+		
+		
+										<div class="col-xl-4 col-lg-5 col-md-4">
+		
+											<div class="card-body">
+												<% 
+													let countries = {}; 
+													let totalVisits = 0;
+													let visitPercentage = {};
+												
+												%>
+												<% for (let i = 0; i < data.length; i++) { 
+													if (countries[data[i].country]) {
+														countries[data[i].country] = countries[data[i].country] + 1;
+													}else{
+														countries[data[i].country] = 1;
+													}
+													
+												} %>
+												<% console.log(countries); %>
+
+												<% 
+													for (const key in countries) {
+														totalVisits += countries[key];
+													}
+													console.log(totalVisits);
+												%>
+												
+												<% 
+													for (const key in countries) {
+														visitPercentage[key] = (countries[key].toFixed(2)/totalVisits)*100;
+													}
+													console.log(visitPercentage);
+												%>
+
+												<% for (const key in visitPercentage) {%>
+														<div class="text_country">
+		
+															<h2 class="mt-0"><%=key%> <span><%=countries[key]%></span></h2>
+				
+															<div class="progress mb-4" style="height: 5px;">
+				
+																<div class="progress-bar bg-primary" role="progressbar" style="width: <%=visitPercentage[key]%>%;" aria-valuenow="<%=visitPercentage[key]%>" aria-valuemin="0" aria-valuemax="100"></div>
+				
+															</div>
+				
+														</div> 	
+													<%}%>
+												
+												
+		
+		
+											</div>
+		
+										</div>
+		
+		
+		
+									</div>
+		
+		
+		
+								</div>
+		
+							</div>
+						</div>
+					</section>
+		
+					<!-- Section_End -->
+		
+		
+		
+				</div>
+		
+			</div>
+
+<%- include('../../_partials/_footer') %>
+
+<%- include('../../_partials/_foot') %>
+		

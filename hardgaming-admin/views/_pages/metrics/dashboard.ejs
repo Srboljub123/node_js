@@ -1,0 +1,323 @@
+<head>
+    <% 
+    let newData
+    let userInstance
+
+    let currentMemPercentage = 10
+    console.log(currentMemPercentage);
+    let memFill = (currentMemPercentage * 180)/100
+
+    let currentCPUPercentage = 20
+    console.log(currentCPUPercentage);
+    let CPUFill = (currentCPUPercentage * 180)/100
+
+    let currentDiskPercentage = 1
+    console.log(currentDiskPercentage);
+    let UsersFill = (currentDiskPercentage * 180)/100
+    
+  %> 
+    
+    
+  <style>
+    .square {
+      position: relative;
+      width: 100%;
+      background-color: #040919;
+      border-style: solid;
+      border-color: black;
+      border-width: 5px;
+    }
+
+    .square:after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+
+    .content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow:auto;
+    }
+
+    .circle-wrap {
+      margin: 50px auto;
+      width: 150px;
+      height: 150px;
+      background: #e6e2e7;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillMem {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillMem {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillMem {
+      animation: fillMem ease-in-out 3s;
+      transform: rotate(<%=memFill%>deg);
+    }
+    @keyframes fillMem {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=memFill%>deg);
+      }
+    }
+
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillCPU {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillCPU {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillCPU {
+      animation: fillCPU ease-in-out 3s;
+      transform: rotate(<%=CPUFill%>deg);
+    }
+    @keyframes fillCPU {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=CPUFill%>deg);
+      }
+    }
+
+    .circle-wrap .circle .mask,
+    .circle-wrap .circle .fillUsers {
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .circle-wrap .circle .mask {
+      clip: rect(0px, 150px, 150px, 75px);
+    }
+    .circle-wrap .circle .mask .fillUsers {
+      clip: rect(0px, 75px, 150px, 0px);
+      background-color: #9e00b1;
+    }
+    .circle-wrap .circle .mask.full,
+    .circle-wrap .circle .fillUsers {
+      animation: fillUsers ease-in-out 3s;
+      transform: rotate(<%=UsersFill%>deg);
+    }
+    @keyframes fillUsers {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(<%=UsersFill%>deg);
+      }
+    }
+    .circle-wrap .inside-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: #fff;
+      line-height: 130px;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 10px;
+      position: absolute;
+      z-index: 100;
+      font-weight: 700;
+      font-size: 2em;
+    }
+    
+    .metrics{
+        /*margin-right: 2%;*/
+        margin-top: 5%;
+        border: 1px solid #ccc!important;
+        border-radius: 16px;
+    }
+  </style>
+</head>
+<%- include('../../_partials/_head') %>
+<%- include('../../_partials/_header') %>
+
+<%- include('../../_partials/_right') %>
+
+	<div class="container ">
+	    <div class="row">
+	        <div class="col-md-6 metrics">
+	            <div class="row">
+    	        <div class="col-md-6">
+    	           <b>HostName|S/N</b> 
+    	        </div>
+    	    </div>
+        	    <div class="row">
+        	      <div class="col-md-4">
+                    <h3 class="text-center">CPU Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillCPU"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillCPU"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="cpuCircle">
+                          <%=currentCPUPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">mbps IN</h4>
+                    <h4 class="text-center">mbps OUT</h4>
+                    
+                  </div>
+                  <div class="col-md-4">
+                    <h3 class="text-center">Memory Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillMem"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillMem"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="memCircle">
+                          <%=currentMemPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">Total Mem</h4>
+                    <h4 class="text-center">Free Mem</h4>
+                  </div>  
+                  <div class="col-md-4">
+                    <h3 class="text-center">Disk Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillUsers"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillUsers"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="usersCircle">
+                          <%=currentDiskPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">Total Disk</h4>
+                    <h4 class="text-center">Free Disk</h4>
+                  </div>  
+                </div>
+	        </div>
+	        <div class="col-md-6 metrics">
+	            <div class="row">
+    	        <div class="col-md-6">
+    	           <b>HostName|S/N</b> 
+    	        </div>
+    	    </div>
+        	    <div class="row">
+        	      <div class="col-md-4">
+                    <h3 class="text-center">CPU Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillCPU"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillCPU"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="cpuCircle">
+                          <%=currentCPUPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">mbps IN</h4>
+                    <h4 class="text-center">mbps OUT</h4>
+                    
+                  </div>
+                  <div class="col-md-4">
+                    <h3 class="text-center">Memory Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillMem"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillMem"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="memCircle">
+                          <%=currentMemPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">Total Mem</h4>
+                    <h4 class="text-center">Free Mem</h4>
+                  </div>  
+                  <div class="col-md-4">
+                    <h3 class="text-center">Disk Usage</h3>
+                    <div class="circle-wrap">
+                      <div class="circle">
+                        
+                        <div class="mask full">
+                          <div class="fillUsers"></div>
+                        </div>
+                      
+                        <div class="mask half">
+                          <div class="fillUsers"></div>
+                        </div>
+                        
+                        <div class="inside-circle" id="usersCircle">
+                          <%=currentDiskPercentage%>%
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <h4 class="text-center">Total Disk</h4>
+                    <h4 class="text-center">Free Disk</h4>
+                  </div>  
+                </div>
+	        </div>
+	    </div>
+	    
+	</div>
+
+<%- include('../../_partials/_footer') %>
+
+<%- include('../../_partials/_foot') %>
+		

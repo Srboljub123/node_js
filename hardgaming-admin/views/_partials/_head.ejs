@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+
+
+	<head>
+
+		<meta charset="utf-8">
+
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<% for (let i=0; i<nav.length; i++) {
+            if(nav[i].title === active){
+                header = nav[i].title;
+                sub = nav[i].sub;
+            }
+        } %>
+        <title><%= title %> - <%= header %> </title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+		<!-- google font -->
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/ionicons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+		<link href="/css/weather-icons.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/css/all.min.css" />
+
+		<!--Morris Chart -->
+
+		<link rel="stylesheet" href="/js/index/morris-chart/morris.css">
+
+		<link href="/css/style.css" rel="stylesheet">
+
+		<link href="/css/responsive.css" rel="stylesheet">
+
+	</head>
+
+
+
+	<body>

@@ -1,0 +1,96 @@
+<nav id="navbar" class="navbar order-last order-lg-0">
+    <ul>
+      <% nav.forEach(navItem => {
+        if (active == navItem.title) {%>
+          <li><a class="nav-link scrollto active" href="<%=navItem.link%>"><%=navItem.title%></a></li>
+      <%} else {%> 
+          <li><a class="nav-link scrollto" href="<%=navItem.link%>"><%=navItem.title%></a></li>
+      <%}
+      });%> 
+      
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->
+  <% if (status.loggedin) {%>
+    <a class="buy-tickets scrollto" href="/user/dashboard" data-toggle="tooltip" data-placement="bottom" title="Dashboard"><i class="fa-solid fa-user"></i></a><a class="buy-tickets scrollto" href="/user/settings" data-toggle="tooltip" data-placement="bottom" title="Settings"><i class="fa-solid fa-gear"></i></a><a class="buy-tickets scrollto" href="/auth/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+<%} else {%>
+    <a class="buy-tickets" href="" data-bs-toggle="modal" data-bs-target="#login-modal" data-toggle="tooltip" data-placement="bottom" title="Login"><i class="fa-solid fa-arrow-right-to-bracket"></i></a><a class="buy-tickets scrollto" href="" data-bs-toggle="modal" data-bs-target="#register-modal" data-toggle="tooltip" data-placement="bottom" title="Register"><i class="fa-solid fa-user-plus"></i></a>
+<%} %>
+</div>
+</header><!-- End Header -->
+
+<!-- Login Modal -->
+  <div id="login-modal" class="modal fade">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-center">Login</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="login">
+            <form action="/auth/login" method="post">
+                <label for="username">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-user"></i>
+                </label>
+                <input type="text" name="username" placeholder="Username" id="username" required>
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                </label>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <input type="submit" value="Login">
+            </form>
+          </div>
+          <p style="color: white;">Not Registered? Register <a href="#" data-bs-toggle="modal" data-bs-target="#register-modal">Here</a></p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+<!-- /.modal -->
+
+<!-- Login Modal -->
+  <div id="register-modal" class="modal fade">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Register</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="login">
+            <form action="/auth/register" method="post">
+                <label for="username">
+                    <!-- font awesome icon -->
+                    <i class="fa-solid fa-id-card"></i>
+                </label>
+                <input type="text" name="username" placeholder="Username" id="username" required>
+                <label for="first">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-user"></i>
+                </label>
+                <input type="text" name="first" placeholder="First Name" id="first" required>
+                <label for="last">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-user"></i>
+                </label>
+                <input type="text" name="last" placeholder="Last Name" id="last" required>
+                <label for="email">
+                    <!-- font awesome icon -->
+                    <i class="fas fa-at"></i>
+                </label>
+                <input type="email" name="email" placeholder="Email Address" id="email" required>
+                
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                </label>
+                <input type="password" name="password" placeholder="Password" id="password" required>
+                <input type="submit" value="Register">
+            </form>
+          </div>
+          <p style="color: white;">Already Registered? Login <a href="#" data-bs-toggle="modal" data-bs-target="#login-modal">Here</a></p>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div>
+<!-- /.modal -->

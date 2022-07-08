@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../_partials/_head') %>
+    </head>
+    <body>
+        
+        <%- include('../../_partials/_navbar') %>
+
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-2 shadow-lg side-content text-center">
+                    Left Side Panel
+                </div> -->
+                <div class="col-10 shadow-lg main-content text-center">
+                    <div class="row">
+                        <% if (!instances) {%>
+                            <h1>You have no servers, Purchase one <a href="/pricing">here</a> </h1>
+                        <%}else{ 
+                            // console.log('api Instances: ', instanceData);
+                            instances.forEach((instance, i, arr) => {
+                                let status
+                                let statusColor
+                                if (instance.status == 1) {
+                                    status = "<span class='badge badge-success'>Running</span>"
+                                }else{
+                                    status = "<span class='badge badge-danger'>Stopped</span>"
+                                }
+                                
+                                for (let index = 0; index < instanceData.length; index++) {
+                                    const element = instanceData[index];
+                                    
+                                        if (element.InstanceID === instance.instance_id) {%>
+                                        <div class="col-4 pb-md-4">
+                                            <div class="card bg-dark text-white shadow-sm border-0">
+                                                <img class="card-img" style="opacity: .25" src="<%=instance.img%>" alt="Card image">
+                                                <div class="card-img-overlay d-flex flex-column align-items-start">
+                                                    <h4 class="card-title"><%=instance.game_id%> - <%=element.FriendlyName%></h4>
+                                                    <p class="card-text mt-auto">Server Status:  <%-status%></p>
+                                                    <p class="card-text"></p>
+                                                    <span class="font-weight-normal mr-2"><a href="#" class="btn btn-dark -btn-block">MANAGE</a>    
+                                                        
+                                                    </span>
+                                                    <div class="pl-4 row text-right">
+                                                        <form method="post" action="/instance/start" class="text-right">
+                                                            <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                                            <button type="submit" class="badge badge-success"><i class="fa fa-play" aria-hidden="true"></i></button>  
+                                                        </form>
+                                                        
+                                                        <form method="post" action="/instance/stop">
+                                                            <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                                            <button type="submit" class="badge badge-danger"><i class="fa fa-stop" aria-hidden="true"></i></button> 
+                                                        </form> 
+                                                        
+                                                        
+                                                        <form method="post" action="/instance/delete" class="text-right">
+                                                            <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                                            <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                                            <button type="submit" class="badge badge-danger text-right"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!--Start Instance Form-->
+                                        <div style="display: none;">
+                                            <form method="post" action="/instance/start">
+                                                <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                                <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                            </form>
+                                        </div>
+
+                                        <!--Stop Instance Form-->
+                                        <div style="display: none;">
+                                            <form method="post" action="/instance/start">
+                                                <input type="text" hidden value="<%=element.InstanceID%>" name="instanceID">
+                                                <input type="text" hidden value="<%=element.InstanceName%>" name="instanceName">
+                                            </form>
+                                        </div>
+
+                                        <!--Delete Instance Form-->
+                                        <div style="">
+                                            
+                                        </div>
+
+
+
+
+
+                                    <% }
+                                }
+                            });
+                        }%>
+                    </div>
+                    
+                    
+                </div>
+                <%- include('../../_partials/_sidebar') %>
+            </div>
+        </div>
+
+        <%- include('../../_partials/_footer') %>
+    </body>
+</html

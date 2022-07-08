@@ -1,0 +1,252 @@
+
+<%- include('../../_partials/_head') %>
+<link href="/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+		<link href="/css/style.css" rel="stylesheet">
+
+		<link href="/css/responsive.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/ionicons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+<%- include('../../_partials/_header') %>
+
+<%- include('../../_partials/_right') %>
+
+<main class="content_wrapper">
+
+    <!--page title start-->
+
+    <div class="page-heading">
+
+        <div class="container-fluid">
+
+            <div class="row d-flex align-items-center">
+
+                <div class="col-md-6">
+
+                    <div class="page-breadcrumb">
+
+                        <h1>HardGaming Services</h1>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 justify-content-md-end d-flex">
+
+                    <div class="breadcrumb_nav">
+
+                        <ol class="breadcrumb">
+
+                            <li>
+
+                                <i class="fa fa-home"></i>
+
+                                <a class="parent-item" href="index.html">Home</a>
+
+                                <i class="fa fa-angle-right"></i>
+
+                            </li>
+
+                            <li class="active">
+
+                                Services
+
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--page title end-->
+
+    <div class="container-fluid">
+
+        <!-- state start-->
+    
+        <div class="row">
+    
+            <div class=" col-sm-12">
+    
+                <div class="card card-shadow mb-4">
+    
+                    <div class="card-header">
+    
+                        <div class="card-title">
+    
+                            <div class="table-show-hide">
+    
+                                <strong class="mr-3">Toggle column:</strong>
+        
+                                <a class="toggle-vis" data-column="0">Name</a> - <a class="toggle-vis" data-column="1">Short Description</a> - <a class="toggle-vis" data-column="2">Users</a> - <a class="toggle-vis" data-column="3">Price</a> - <a class="toggle-vis" data-column="4">Available</a> - <a class="toggle-vis" data-column="5">SKU</a> - <a class="toggle-vis" data-column="6">Image</a>
+        
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                    <div class="card-body">
+    
+                        
+    
+                        <table id="show-hide" class="display table table-bordered table-striped">
+    
+                            <thead>
+    
+                                <tr>
+    
+                                    <th>Name</th>
+    
+                                    <th>Short Description</th>
+    
+                                    <th>Users</th>
+    
+                                    <th>Price</th>
+    
+                                    <th>Available</th>
+    
+                                    <th>SKU</th>
+
+                                    <th>Image</th>
+    
+                                </tr>
+    
+                            </thead>
+    
+                            
+    
+                            <tbody>
+                                
+                                <%  for (let i = 0; i < data.length; i++) {
+                                        let avail;
+                                        const game = data[i]; 
+                                            if (game.avail == 1) {
+                                                avail=true
+                                            }else{
+                                                avail=false
+                                            }
+                                        %>
+                                        
+                                        <tr>
+                                            <td><a href="https://dev.hardgaming.tech/purchase/<%=game.id%>"><%= game.name %></a></td>
+                                            <td><%= game.shortdesc %></td>
+                                            <td><%= game.users %></td>
+                                            <td><%= game.price %></td>
+                                            <td><%= avail %></td>
+                                            <td><%= game.sku %></td>
+                                            <td><img src="<%= game.img %>" style="height: 50px;"></td>
+                                        </tr>
+                                        
+                                <% } %>    
+                                
+    
+                                
+    
+                            </tbody>
+    
+                            <tfoot>
+    
+                                <tr>
+    
+                                    <th>Name</th>
+    
+                                    <th>Short Description</th>
+    
+                                    <th>Users</th>
+    
+                                    <th>Price</th>
+    
+                                    <th>Available</th>
+    
+                                    <th>SKU</th>
+
+                                    <th>Image</th>
+    
+                                </tr>
+    
+                            </tfoot>
+    
+                        </table>
+                        <a href="/services/add" class="btn btn-dark btn-block" >Add Service</a>
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+        </div>
+    
+        <!-- state end-->
+    
+    </div>
+
+
+
+</main>
+<%- include('../../_partials/_footer') %>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+
+		<script type="text/javascript" src="/js/popper.min.js"></script>
+
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+		<!--datatables-->
+
+		<script src="/js/jquery.dataTables.min.js"></script>
+
+		<script src="/js/dataTables.bootstrap4.min.js"></script>
+
+		<script type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
+
+		<script src="/js/custom.js" type="text/javascript"></script>
+
+		<script>
+
+			$(document).ready(function() {
+
+				var table = $('#show-hide').DataTable({
+
+					"scrollY" : "400px",
+
+					"paging" : false
+
+				});
+
+				$('a.toggle-vis').on('click', function(e) {
+
+					e.preventDefault();
+
+					// Get the column API object
+
+					var column = table.column($(this).attr('data-column'));
+
+					// Toggle the visibility
+
+					column.visible(!column.visible());
+
+				});
+
+			});
+
+		</script>
+		

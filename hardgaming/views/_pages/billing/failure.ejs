@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../_partials/_head') %>
+    </head>
+    <body>
+        <% if (game.avail > 0) { game.avail = "Yes"}else{game.avail = "No"} %>
+
+        <%- include('../../_partials/_navbar') %>
+
+        <div class="container">
+            
+            <!-- <div class="row">
+                <div class="col-12 game-header">
+                    
+                </div>
+                    
+                </div>
+            </div> -->
+            <div class="row">
+                <!-- <div class="col-2 shadow-lg side-content text-center">
+                    Left Side Panel
+                </div> -->
+                <div class="col-10 shadow-lg main-content">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-danger" role="alert">
+                                <strong>Failure!</strong> Your purchase has failed to complete!
+                            </div>
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="col-2">
+                            <img class="game-logo" src="<%=game.img%>"/>
+                        </div>
+                        <div class="col-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-7">
+                            <p><b>Name:</b><br/> <%=game.name%></p>
+                            <p><b>Description:</b><br/> <%=game.shortdesc%></p>
+                            <p><b>User Count:</b><br/><%=game.users%></p>
+                            <p><b>Available:</b><br/><%=game.avail%></p>
+                            <p><b>Price:</b><br/>$<%=game.price%></p>
+                        </div>
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                   </div>
+                   <div class="row">
+                       <div class="col-12">
+                        <a href="/pay/<%=game.id%>" class="btn btn-dark btn-block">PURCHASE NOW</a>
+                       </div>
+                   </div>
+                </div>
+                <%- include('../../_partials/_sidebar') %>
+            </div>
+        </div>
+
+        <%- include('../../_partials/_footer') %>
+    </body>
+</html

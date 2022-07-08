@@ -1,0 +1,316 @@
+
+<%- include('../../_partials/_head') %>
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" type="text/css" />
+
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/ionicons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+
+		<link href="/css/jquery.mCustomScrollbar.css" rel="stylesheet">
+
+		<link href="/css/animate.min.css" rel="stylesheet">
+
+		<!--jqery steps-->
+
+		<link href="/css/jquery.steps.css" rel="stylesheet">
+
+		<link href="/css/style.css" rel="stylesheet">
+
+		<link href="/css/responsive.css" rel="stylesheet">
+
+<%- include('../../_partials/_header') %>
+
+<%- include('../../_partials/_right') %>
+
+<main class="content_wrapper">
+
+
+    <div class="container-fluid">
+
+        <!-- state start-->
+
+        <div class="row">
+
+            
+            <div class="col-md-12">
+
+                <div class="card card-shadow mb-4">
+
+                    <div class="card-header">
+
+                        <div class="card-title">
+
+                            Add Service
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <form id="wizard-validation-form" enctype="multipart/form-data" method="post" action="/addService" class="right-text-label-form">
+
+                            <div>
+
+                                <h3>Game Information</h3>
+
+                                <section>
+
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-4 col-form-label col-form-label-sm" for="gameName">Game Name* </label>
+
+                                        <div class="col-sm-6">
+
+                                            <input class="form-control" id="gameName" name="gameName" type="text" required>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-4 col-form-label col-form-label-sm" for="shortdesc"> Short Description *</label>
+
+                                        <div class="col-sm-6">
+
+                                            <input id="shortdesc" name="shortdesc" type="text" class="required form-control">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="gameIcon">Game Image *</label>
+
+                                        <input type="file" class="form-control-file" id="gameIcon" name="gameIcon" required>
+
+                                    </div>
+
+                                </section>
+
+                                <h3>Service Information</h3>
+
+                                <section>
+
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-4 col-form-label col-form-label-sm" for="users"> Amount of Users *</label>
+
+                                        <div class="col-sm-6">
+
+                                            <input id="users" name="users" type="text" class="required form-control" value="10">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-4 col-form-label col-form-label-sm " for="price"> Price *</label>
+
+                                        <div class="col-sm-6">
+
+                                            <input id="price" name="price" type="number" class="required form-control" value="1000">
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label class="col-sm-4 col-form-label col-form-label-sm" for="avail">Available *</label>
+
+                                        <div class="col-sm-6">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+
+                                                    <input class="form-check-input" type="radio" name="avail" id="avail1" value="true" checked>
+    
+                                                    True</label>
+                                                    
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+
+                                                    <input class="form-check-input" type="radio" name="avail" id="avail1" value="false">
+    
+                                                    False</label>
+
+                                            
+
+                                        </div>
+
+                                    </div>
+                                
+
+                                </section>
+
+                                <h3>Confirmation</h3>
+
+                                <section>
+
+                                    <div class="form-group row">
+
+                                        <div class="col-sm-12">
+
+                                            <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required" checked>
+
+                                            <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+
+                                        </div>
+
+                                    </div>
+
+                                </section>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- state end-->
+
+    </div>
+
+</main>
+
+<%- include('../../_partials/_footer') %>
+
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+
+		<script src="/js/jquery-ui.min.js"></script>
+
+		<script type="text/javascript" src="/js/popper.min.js"></script>
+
+		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+		<script type="text/javascript" src="/js/jquery.validate.js"></script>
+
+		<!--form basic wizard init-->
+
+			<script src="/js/form-wizard-init.js"></script>
+
+			<!--jquery steps-->
+
+			<script src="/js/jquery.steps.min.js"></script>
+
+			<!--jquery stepy-->
+
+			<script src="/js/jquery.stepy.js"></script>
+
+		<script type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
+
+		<script src="/js/custom.js" type="text/javascript"></script>
+
+		<script>
+
+			//stepy tab wizard
+
+			$(function() {
+
+				$('#default').stepy({
+
+					backLabel : 'Previous',
+
+					block : true,
+
+					nextLabel : 'Next',
+
+					titleClick : true,
+
+					titleTarget : '.stepy-tab'
+
+				});
+
+			});
+
+		</script>
+
+		<script type="text/javascript">
+
+			// wizard validation
+
+			$(document).ready(function() {
+
+				var form = $("#wizard-validation-form");
+
+				form.validate({
+
+					errorPlacement : function errorPlacement(error, element) {
+
+						element.after(error);
+
+					}
+
+				});
+
+				form.children("div").steps({
+
+					headerTag : "h3",
+
+					bodyTag : "section",
+
+					transitionEffect : "slideLeft",
+
+					onStepChanging : function(event, currentIndex, newIndex) {
+
+						form.validate().settings.ignore = ":disabled,:hidden";
+
+						return form.valid();
+
+					},
+
+					onFinishing : function(event, currentIndex) {
+
+						form.validate().settings.ignore = ":disabled";
+
+						return form.valid();
+
+					},
+
+					onFinished : function(event, currentIndex) {
+                        
+                        form.submit();
+
+					}
+
+				}).validate({
+
+					errorPlacement : function errorPlacement(error, element) {
+
+						element.after(error);
+
+					},
+
+					rules : {
+
+						confirm : {
+
+							equalTo : "#password"
+
+						}
+
+					}
+
+				});
+
+			});
+
+		</script>
+

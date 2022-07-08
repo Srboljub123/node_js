@@ -1,0 +1,33 @@
+
+// TargetADSInstance	Guid		Required
+// NewInstanceId	Guid		Required
+// Module	String		Required
+// InstanceName	String		Required
+// FriendlyName	String		Required
+// IPBinding	String		Required
+// PortNumber	Int32		Required
+// AdminUsername	String		Required
+// AdminPassword	String		Required
+// ProvisionSettings	Dictionary<String, String>		Required
+
+
+
+{
+	"SESSIONID": "8b272301-46df-4064-aed1-07fb3c90cbca",
+    "TargetADSInstance":"dab0622b-c07f-404a-8eea-50aec3415a19",
+    "NewInstanceId":"7113EB66-AE67-4C38-9636-7DBFAF4001E5",
+    "Module":"srcds",
+    "InstanceName":"TF212",
+    "FriendlyName":"TF2 API Test2",
+    "IPBinding":"0.0.0.0",
+    "PortNumber":"9058",
+    "AdminUsername":"admin",
+    "AdminPassword":"blah123!",
+    "ProvisionSettings":{
+        "srcdsModule.SRCDS.Map": "cp_well",
+        "srcdsModule.SRCDS.ServerType": "Team Fortress 2 Dedicated Server",
+        
+    },
+    "AutoConfigure":true,
+    "DisplayImageSource": "steam:440"
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../_partials/_head') %>
+    </head>
+    <body>
+        
+        <%- include('../../_partials/_navbar') %>
+
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-2 shadow-lg side-content text-center">
+                    Left Side Panel
+                </div> -->
+                <div class="col-10 shadow-lg main-content text-center">
+
+                    <!-- Empty Row -->
+                    <div class="row">
+                        <div class="col-12">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <% console.log(games);%>
+                    <div class="row">
+                        <% 
+                        for (let i = 0; i < games.length; i++) {
+                            const game = games[i];
+                            let price = game.price;
+                            var dollars = price / 100;
+                            dollars = dollars.toLocaleString("en-US", {style:"currency", currency:"USD"});
+                            %>
+                            <div class="col-3" style="padding-bottom: 20px;">
+                                    <div class="card card-content">
+                                        <img class="card-img-top" src="<%=game.img%>" alt="Card image cap">
+                                        <div class="card-body"><h4 class="card-title"><%=game.name%></h4>
+                                            <h6 class="card-subtitle mb-2 text-muted">Starting at <%=dollars%></h6>
+                                            <p class="card-text"><%=game.shortdesc %></p>
+                                            <a href="/purchase/<%=game.id%>" class="card-link btn btn-primary">Purchase</a>
+                                        </div>
+                                    </div>
+                                </div>    
+                          <%
+                        }%>
+                    </div>
+                    
+
+                    
+                </div>
+                <%- include('../../_partials/_sidebar') %>
+            </div>
+        </div>
+
+        <%- include('../../_partials/_footer') %>
+    </body>
+</html

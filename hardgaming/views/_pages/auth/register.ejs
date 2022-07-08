@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('../../_partials/_head') %>
+    </head>
+    <body>
+        
+        <%- include('../../_partials/_navbar') %>
+
+        <div class="container">
+            <div class="row">
+                <!-- <div class="col-2 shadow-lg side-content text-center">
+                    Left Side Panel
+                </div> -->
+                <div class="col-12 shadow-lg main-content text-center">
+                    <div class="login">
+                        <h1>Register</h1>
+                        <form action="/auth/register" method="post">
+                            <label for="username">
+                                <!-- font awesome icon -->
+                                <i class="fa-solid fa-id-card"></i>
+                            </label>
+                            <input type="text" name="username" placeholder="Username" id="username" required>
+                            <label for="first">
+                                <!-- font awesome icon -->
+                                <i class="fas fa-user"></i>
+                            </label>
+                            <input type="text" name="first" placeholder="First Name" id="first" required>
+                            <label for="last">
+                                <!-- font awesome icon -->
+                                <i class="fas fa-user"></i>
+                            </label>
+                            <input type="text" name="last" placeholder="Last Name" id="last" required>
+                            <label for="email">
+                                <!-- font awesome icon -->
+                                <i class="fas fa-at"></i>
+                            </label>
+                            <input type="email" name="email" placeholder="Email Address" id="email" required>
+                            
+                            <label for="password">
+                                <i class="fas fa-lock"></i>
+                            </label>
+                            <input type="password" name="password" placeholder="Password" id="password" required>
+                            <input type="submit" value="Register">
+                        </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <%- include('../../_partials/_footer') %>
+    </body>
+</html
